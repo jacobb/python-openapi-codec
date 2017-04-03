@@ -191,6 +191,8 @@ def _get_parameters(link, encoding):
             }
             if field_type == 'array':
                 parameter['items'] = {'type': 'string'}
+            elif field_type == 'string':
+                schema_property['example'] = 'doggie'
             parameters.append(parameter)
 
     if properties:
