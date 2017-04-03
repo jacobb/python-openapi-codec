@@ -136,10 +136,12 @@ def _get_parameters(link, encoding):
     required = []
 
     for field in link.fields:
+        print(field.name)
         location = get_location(link, field)
         field_description = _get_field_description(field)
         field_type = _get_field_type(field)
         if location == 'form':
+            print('1')
             if encoding in ('multipart/form-data', 'application/x-www-form-urlencoded'):
                 # 'formData' in swagger MUST be one of these media types.
                 parameter = {
@@ -166,6 +168,7 @@ def _get_parameters(link, encoding):
                 if field.required:
                     required.append(field.name)
         elif location == 'body':
+            print('2')
             if encoding == 'application/octet-stream':
                 # https://github.com/OAI/OpenAPI-Specification/issues/50#issuecomment-112063782
                 schema = {'type': 'string', 'format': 'binary'}
@@ -180,6 +183,7 @@ def _get_parameters(link, encoding):
             }
             parameters.append(parameter)
         else:
+            print('3')
             parameter = {
                 'name': field.name,
                 'required': field.required,
