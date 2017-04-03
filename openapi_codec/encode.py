@@ -160,7 +160,9 @@ def _get_parameters(link, encoding):
                     'description': field_description,
                     'type': field_type,
                 }
-                if field_type == 'array':
+                if field_type == 'string':
+                    schema_property['example'] = 'doggie'
+                elif field_type == 'array':
                     schema_property['items'] = {'type': 'string'}
                 properties[field.name] = schema_property
                 if field.required:
