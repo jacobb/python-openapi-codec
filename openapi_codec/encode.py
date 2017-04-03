@@ -23,6 +23,7 @@ def generate_swagger_object(document):
         swagger['schemes'] = [parsed_url.scheme]
 
     swagger['paths'] = _get_paths_object(document)
+    print(swagger)
 
     return swagger
 
