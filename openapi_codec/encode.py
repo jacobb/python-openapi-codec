@@ -139,6 +139,7 @@ def _get_parameters(link, encoding):
         location = get_location(link, field)
         field_description = _get_field_description(field)
         field_type = _get_field_type(field)
+        print(field.name)
         if location == 'form':
             if encoding in ('multipart/form-data', 'application/x-www-form-urlencoded'):
                 # 'formData' in swagger MUST be one of these media types.
@@ -151,11 +152,12 @@ def _get_parameters(link, encoding):
                 }
                 if field_type == 'array':
                     parameter['items'] = {'type': 'string'}
+                if field_type == 'string':
+                    parameter['example'] = 'doggie'
                 parameters.append(parameter)
             else:
                 # Expand coreapi fields with location='form' into a single swagger
                 # parameter, with a schema containing multiple properties.
-
                 schema_property = {
                     'description': field_description,
                     'type': field_type,
@@ -180,6 +182,8 @@ def _get_parameters(link, encoding):
                 'description': field_description,
                 'schema': schema
             }
+            if field_type == 'string':
+                schema_property['example'] = 'doggie'
             parameters.append(parameter)
         else:
             parameter = {
