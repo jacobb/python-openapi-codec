@@ -184,7 +184,7 @@ def _get_parameters(link, encoding):
                 'schema': schema
             }
             if field_type == 'string':
-                schema_property['example'] = 'doggie'
+                parameter['example'] = 'doggie'
             parameters.append(parameter)
         else:
             parameter = {
